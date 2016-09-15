@@ -18,17 +18,17 @@ def percent_year(seconds)
 	('%.1f' % (seconds / SECONDS_IN_YEAR * 100)) + '%'
 end
 
-def convert(x)
+def standard_to_military(x)
 	hours, b = x.split(":")
 	minutes, am_pm = b.split(" ")
 
-	if am_pm.downcase == 'pm'
+	if am_pm.downcase == "pm"
 		if hours.to_i == 12
 			return hours + ":" + c
 		else
 			return (hours.to_i + 12).to_s + ":" + c
 		end
-	elsif am_pm.downcase == 'am'
+	elsif am_pm.downcase == "am"
 		if hours.to_i == 12
 			return (hours.to_i - 12).to_s + ":" + c
 		else

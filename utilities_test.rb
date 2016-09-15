@@ -44,7 +44,17 @@ describe 'utilities' do
   describe 'standard to military' do
 
     it 'Converts time to military' do
-      convert('3:42am').must_equal('3:42')
+      standard_to_military('3:42am').must_equal('3:42')
+      standard_to_military('7:00pm').must_equal('19:00')
+    end
+    it 'works at noon' do
+      standard_to_military('12:00pm').must_equal('12:00')
+    end
+    it 'works at midnight' do
+      standard_to_military('12:00am').must_equal('0:00')
+    end
+    it 'works with uppercase' do
+      standard_to_military('6:32PM').must_equal('6:32')
     end
 
   end
