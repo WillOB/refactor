@@ -1,42 +1,41 @@
 
-def evaluate(x)
-	if x % 100 == 0
-		if x % 400 == 0
-			true
-		else
-			false
-		end
-	elsif x % 4 == 0
-		true
+def leap_year?(year)
+	if multiple?(year, 100)
+		multiple?(year, 400)
 	else
-		false
+		multiple?(year, 4) && !multiple?(year, 100)
 	end
+
 end
 
-def amount(a)
-	('%.1f' % ((a / 31536000.0) * 100)) + '%'
+def multiple?(year, divisor)
+	year % divisor == 0
+end
+
+SECONDS_IN_YEAR = 31536000.0
+
+def percent_year(seconds)
+	('%.1f' % (seconds / SECONDS_IN_YEAR * 100)) + '%'
 end
 
 def convert(x)
-	a, b = x.split(":")
-	c, d = b.split(" ")
-	e = ""
+	hours, b = x.split(":")
+	minutes, am_pm = b.split(" ")
 
-	if d.downcase != 'am'
-		if a.to_i == 12
-			e = a + ":" + c
+	if am_pm.downcase == 'pm'
+		if hours.to_i == 12
+			return hours + ":" + c
 		else
-			e = (a.to_i + 12).to_s + ":" + c
+			return (hours.to_i + 12).to_s + ":" + c
 		end
-	elsif d.downcase != 'pm'
-		if a.to_i == 12
-			e = (a.to_i - 12).to_s + ":" + c
+	elsif am_pm.downcase == 'am'
+		if hours.to_i == 12
+			return (hours.to_i - 12).to_s + ":" + c
 		else
-			e = a + ":" + c
+			return hours + ":" + c
 		end
 	end
 
-	return e
 end
 
 def convert2(x)
