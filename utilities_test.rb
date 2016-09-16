@@ -44,19 +44,37 @@ describe 'utilities' do
   describe 'standard to military' do
 
     it 'Converts time to military' do
-      standard_to_military('3:42am').must_equal('3:42')
-      standard_to_military('7:00pm').must_equal('19:00')
+      standard_to_military('3:42 am').must_equal('3:42')
+      standard_to_military('7:00 pm').must_equal('19:00')
     end
     it 'works at noon' do
-      standard_to_military('12:00pm').must_equal('12:00')
+      standard_to_military('12:00 pm').must_equal('12:00')
     end
     it 'works at midnight' do
-      standard_to_military('12:00am').must_equal('0:00')
+      standard_to_military('12:00 am').must_equal('0:00')
     end
     it 'works with uppercase' do
-      standard_to_military('6:32PM').must_equal('6:32')
+      standard_to_military('6:32 PM').must_equal('18:32')
     end
 
   end
 
+  describe 'military_to_standard' do
+
+    it "converts military to standard in afternoon" do
+      military_to_standard('18:32').must_equal('6:32 pm')
+      military_to_standard('21:00').must_equal('9:00 pm')
+    end
+    it "converts time correctly in morning" do
+      military_to_standard('6:08').must_equal('6:08 am')
+      military_to_standard('2:53').must_equal('2:53 am')
+    end
+    it "converts correctly at noon" do
+      military_to_standard('12:00').must_equal('12:00 pm')
+    end
+    it "converts correctly at midnight" do
+      military_to_standard('0:00').must_equal('12:00 am')
+    end
+
+  end
 end

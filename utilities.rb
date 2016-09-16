@@ -24,31 +24,33 @@ def standard_to_military(x)
 
 	if am_pm.downcase == "pm"
 		if hours.to_i == 12
-			return hours + ":" + c
+			return hours + ":" + minutes
 		else
-			return (hours.to_i + 12).to_s + ":" + c
+			return (hours.to_i + 12).to_s + ":" + minutes
 		end
 	elsif am_pm.downcase == "am"
 		if hours.to_i == 12
-			return (hours.to_i - 12).to_s + ":" + c
+			return (hours.to_i - 12).to_s + ":" + minutes
 		else
-			return hours + ":" + c
+			return hours + ":" + minutes
 		end
 	end
 
 end
 
-def convert2(x)
-	a, b = x.split(":")
-	c = ""
+def military_to_standard(time)
+	hours, minutes = time.split(":")
 
-	if a.to_i < 12
-		c = a + b + " am"
+	if hours.to_i == 0
+		return "12:" + minutes + " am"
+	elsif hours.to_i < 12
+		return hours + ':' + minutes + " am"
+	elsif hours.to_i == 12
+		return hours + ':' + minutes + " pm"
 	else
-		c = a + b + " pm"
+		return (hours.to_i - 12).to_s + ':' + minutes + " pm"
 	end
 
-	return c
 end
 
 def okay(a, b)
