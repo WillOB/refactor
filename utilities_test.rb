@@ -77,4 +77,13 @@ describe 'utilities' do
     end
 
   end
+
+  define 'okay' do
+
+    it 'returns false if it is past curfew' do
+    
+    end
+
+  end
+
 end
