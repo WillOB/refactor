@@ -53,14 +53,20 @@ def military_to_standard(time)
 
 end
 
-def okay(a, b)
-	c = false
-	if (a.split(":")[0].to_i >= 8 && b || a.split(":")[0].to_i >= 10 && !b) && a.split(":")[1].split(" ")[1] == 'pm'
-		c = false
+def pm?(time)
+	time.split(' ')[1] == 'pm'
+end
+
+def hour(time)
+	time.split(':')[0].to_i
+end
+
+def on_time?(time, weekday)
+	if pm?(time)
+		return 	(hour(time) <= 8 && weekday) || (hour(time) <= 10 && !weekday)
 	else
-		c = true
+		return true
 	end
-	return c
 end
 
 def span(a, b)

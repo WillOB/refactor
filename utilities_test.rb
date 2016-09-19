@@ -78,11 +78,34 @@ describe 'utilities' do
 
   end
 
-  define 'okay' do
+  describe 'on_time' do
 
-    it 'returns false if it is past curfew' do
-    
+    it "returns false if it is 9 pm or later on a weekday" do
+      on_time?("9:23 pm", true).must_equal(false)
     end
+    it "returns false if it is 11 pm or later on a weekend" do
+      on_time?("11:33 pm", false).must_equal(false)
+    end
+    it "returns true if is is past 9 am" do
+      on_time?("11:08 am", false).must_equal(true)
+      on_time?("11:08 am", true).must_equal(true)
+    end
+    it "returns true in the morning" do
+      on_time?("6:00 am", false).must_equal(true)
+      on_time?("6:00 am", true).must_equal(true)
+    end
+    it "returns true before 9:00 pm" do
+      on_time?("7:32 pm", false).must_equal(true)
+      on_time?("7:32 pm", true).must_equal(true)
+    end
+    it "returns true between 9 and 10 pm on weekends" do
+      on_time?("8:45 pm", true)
+    end
+    it "returns false at curfew" do
+      on_time?("9:00 pm", true)
+      on_time?("11:00 pm", false)
+    end
+
 
   end
 
